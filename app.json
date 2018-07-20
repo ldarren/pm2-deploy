@@ -10,6 +10,8 @@
   }],
   "deploy" : {
     "production" : {
+	"user": "mrtech",
+	"host": "178.128.61.91",
       "user" : "node",
       "host" : "212.83.163.168",
       "ref"  : "origin/master",
