@@ -214,7 +214,8 @@ setup() {
   test $? -eq 0 || abort setup paths failed
   log running setup
   log cloning $repo
-  if test fetch != "fast"; then
+  log $fetch
+  if test $fetch != "fast"; then
     log "full fetch"
     run "git clone $repo $path/source"
   else
