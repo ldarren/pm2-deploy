@@ -236,13 +236,13 @@ setup() {
 
 deploy() {
   local ref=$1
-  local branch=$2
-  log "####### $ref $branch"
   local path=`config_get path`
   local fetch=`config_get fetch`
+  local branch=`config_get branch`
   if test -z "$branch"; then
     branch=${ref#*/}
   fi
+  log "####### $ref $branch"
 
   log "deploying ${ref}"
 
