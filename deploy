@@ -209,6 +209,7 @@ setup() {
   local ref=`config_get ref`
   local fetch=`config_get fetch`
   local branch=${ref#*/}
+
   hook_pre_setup || abort pre-setup hook failed
   run "mkdir -p $path/{shared/{logs,pids},source}"
   test $? -eq 0 || abort setup paths failed
@@ -217,7 +218,7 @@ setup() {
   log $fetch
   if test $fetch != "fast"; then
     log "full fetch"
-    run "git clone $repo $path/source"
+    run "git clone --branch $branch $repo $path/source"
   else
     log "fast fetch"
     run "git clone --depth=5 --branch $branch $repo $path/source"
@@ -237,6 +238,10 @@ deploy() {
   local ref=$1
   local path=`config_get path`
   local fetch=`config_get fetch`
+  local branch=`config_get branch`
+  if test -z "$branch"; then
+    branch=${ref#*/}
+  fi
 
   log "deploying ${ref}"
 
@@ -250,7 +255,7 @@ deploy() {
   # fetch source
   log fetching updates
 
-  if test fetch != "fast"; then
+  if test $fetch != "fast"; then
     log "full fetch"
     run "cd $path/source && git fetch --all --tags"
   else
@@ -272,7 +277,7 @@ deploy() {
 
   # reset HEAD
   log resetting HEAD to $ref
-  run "cd $path/source && git reset --hard $ref"
+  run "cd $path/source && git checkout $ref --branch $branch"
   test $? -eq 0 || abort git reset failed
 
   # link current
