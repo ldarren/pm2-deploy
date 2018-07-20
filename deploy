@@ -236,13 +236,13 @@ setup() {
 
 deploy() {
   local ref=$1
-  local path=`config_get path`
-  local fetch=`config_get fetch`
-  local branch=`config_get branch`
+  local branch=$2
   if test -z "$branch"; then
     branch=${ref#*/}
   fi
   log "####### $ref $branch"
+  local path=`config_get path`
+  local fetch=`config_get fetch`
 
   log "deploying ${ref}"
 
@@ -391,11 +391,11 @@ while test $# -ne 0; do
     setup)  setup $@; exit ;;
     list)  list_deploys; exit ;;
     config) config $@; exit ;;
-    ref) REF=$1 ;;
+    ref) REF=$1; BRANCH=$2 ;;
   esac
 done
 
 check_for_local_changes
 
 # deploy
-deploy "${REF:-`config_get ref`}"
+deploy "${REF:-`config_get ref`}" "${BRANCH}"
