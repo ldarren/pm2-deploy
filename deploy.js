@@ -13,6 +13,7 @@ var path = require('path');
  */
 function spawn(hostJSON, args, cb) {
   var shellSyntaxCommand = "echo '" + hostJSON + "' | \"" + __dirname.replace(/\\/g, '/') + "/deploy\" " + args.join(' ');
+console.log('>>>', shellSyntaxCommand)
   var proc = childProcess.spawn('sh', ['-c', shellSyntaxCommand], { stdio: 'inherit' });
   var error;
 
