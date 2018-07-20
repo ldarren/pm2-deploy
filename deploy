@@ -215,7 +215,6 @@ setup() {
   test $? -eq 0 || abort setup paths failed
   log running setup
   log cloning $repo
-  log $fetch
   if test $fetch != "fast"; then
     log "full fetch"
     run "git clone --branch $branch $repo $path/source"
@@ -240,7 +239,6 @@ deploy() {
   if test -z "$branch"; then
     branch=${ref#*/}
   fi
-  log "####### $ref $branch"
   local path=`config_get path`
   local fetch=`config_get fetch`
 
