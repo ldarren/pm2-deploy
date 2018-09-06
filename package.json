@@ -1,6 +1,6 @@
 {
   "name": "pm2-deploy",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "Deployment system for PM2",
   "main": "deploy.js",
   "engines": {
@@ -11,7 +11,9 @@
     "url": "https://github.com/Unitech/pm2-deploy.git"
   },
   "scripts": {
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "test:ci": "echo \"test placeholder\" && exit 0",
+    "lint:ci": "echo \"lint placeholder\" && exit 0"
   },
   "dependencies": {
     "async": "^2.6",
