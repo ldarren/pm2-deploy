@@ -253,7 +253,7 @@ deploy() {
 
   if run "cd $path/source && git rev-parse --quiet --verify $ref" > /dev/null; then
     log fast forward $ref
-    run "cd $path/source && git checkout $ref && git pull origin $ref"
+    run "cd $path/source && git checkout $ref && git pull origin $ref --rebase"
     test $? -eq 0 || abort git pull failed
   else
     # fetch source

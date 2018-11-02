@@ -1,6 +1,6 @@
 {
   "name": "pm2-deploy",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "description": "Deployment system for PM2",
   "main": "deploy.js",
   "engines": {
