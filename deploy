@@ -223,6 +223,7 @@ setup() {
     run "git clone --depth=5 --branch $branch $repo $path/source"
   fi
   test $? -eq 0 || abort failed to clone
+  run "cd $path/source && git submodule update --init --recursive"
   run "ln -sfn $path/source $path/current"
   test $? -eq 0 || abort symlink failed
   hook post-setup || abort post-setup hook failed
@@ -278,6 +279,7 @@ deploy() {
     fi
     test $? -eq 0 || abort git checkout failed
   fi
+  run "cd $path/source && git submodule update --recursive --remote"
 
   # link current
   run "ln -sfn $path/source $path/current"
